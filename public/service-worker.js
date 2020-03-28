@@ -5,6 +5,7 @@ const FILES_TO_CACHE = [
     "/js/index.js",
     "/js/indexedDB.js",
     "/js/chart.js",
+    "/db.js",
     "manifest.webmanifest",
     "service-worker.js",
     "/css/styles.css",

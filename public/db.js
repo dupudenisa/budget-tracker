@@ -1,4 +1,6 @@
 let db;
+
+const indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 //using new browser api Index.db to create a new database which didnt exist before so now it is upgraded to  version 1
 const request = indexedDB.open("Budget", 1);
 
@@ -17,7 +19,7 @@ request.onsuccess = function (event) {
     db = event.target.result;
 
     if (navigator.onLine) {
-        checkdatabase();
+        checkDatabase();
     }
 }
 
