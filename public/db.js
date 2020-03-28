@@ -14,9 +14,9 @@ request.onupgradeneeded = function (event) {
 //running our check db
 
 request.onsuccess = function (event) {
-    db = target.result;
+    db = event.target.result;
 
-    if (navigator.online) {
+    if (navigator.onLine) {
         checkdatabase();
     }
 }
@@ -30,18 +30,18 @@ request.onerror = function (event) {
 //saving a record 
 
 function saveRecord(record) {
-    const transactions = db.transaction(["pending"], "readwrite");
-    const store = transactions.objectStore("pending");
+    const transaction = db.transaction(["pending"], "readwrite");
+    const store = transaction.objectStore("pending");
     store.add(record);
 }
 
 
 
 function checkdatabase() {
-    db = target.result;
-    const transactions = db.transactions(["pending"], "readwrite");
-    const store = transactions.objectStore("pending")
-    const getAll = store.getAll();
+    //db = target.result;
+    const transaction = db.transaction(["pending"], "readwrite");
+    const store = transaction.objectStore("pending");
+    const getAll = store.getAll()
 
 
     // if we have a successful retrieval we are going to dispatch a fetch & posting all records found:
@@ -70,4 +70,4 @@ function checkdatabase() {
     };
 }
 // listen for app coming back online
-window.addEventListener("online", checkdatabase());
+window.addEventListener("online", checkdatabase);
