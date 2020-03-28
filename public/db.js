@@ -27,6 +27,15 @@ request.onerror = function(event) {
     console.log(req);
 };
 
+//saving a record 
+
+function saveRecord(record) {
+    const transaction = db.transaction(["pending"], "readwrite");
+    const store = transaction.objectStore("pending");
+    store.add(record)
+}
+
+
 
 function checkdatabase() {
     db = request.result;
@@ -49,6 +58,12 @@ getAll.onsuccess = function() {
           })
           .then(response => response.json())
           .then(()=>{
+              const transaction = db.transaction(
+                  ["pending"], "readwrite");
+                  const store = transaction.objectStore
+                  ("pending");
+                  store.clear();
+              
 
           });
     }
